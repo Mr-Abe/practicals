@@ -5,7 +5,7 @@ CC = gcc
 CFLAGS = -std=c11 -Wall -Wextra -Wpedantic -g
 
 # Build both executables from same-named .c files
-TARGETS = hello data
+TARGETS = hello data circle ascii num_cat range
 
 # Default goal
 all: $(TARGETS)
@@ -20,4 +20,4 @@ all: $(TARGETS)
 
 .PHONY: all clean
 clean:
-	rm -f $(TARGETS) *.o
+	rm -rf $(TARGETS) *.o *.dSYM
