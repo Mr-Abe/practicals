@@ -5,7 +5,7 @@ CC = gcc
 CFLAGS = -std=c11 -Wall -Wextra -Wpedantic -g
 
 # Build both executables from same-named .c files
-TARGETS = hello data circle ascii num_cat range control
+TARGETS = hello data circle ascii num_cat range control calc largest loops
 
 # Default goal
 all: $(TARGETS)
