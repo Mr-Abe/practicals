@@ -1,23 +1,26 @@
-# Use 'gcc' as our C Compiler
 CC = gcc
+CFLAGS = -std=c11 -Wall -Wextra -Wpedantic -O2
 
-# These are our compiler flags
-CFLAGS = -std=c11 -Wall -Wextra -Wpedantic -g
+SRC_DIR := src/practicals
+BIN_DIR := bin
 
-# Build both executables from same-named .c files
-TARGETS = hello data circle ascii num_cat range control calc largest loops
-
-# Default goal
-all: $(TARGETS)
-
-# Generic rule: build an executable from the same-named .c file
-%: %.c
-	$(CC) $(CFLAGS) -o $@ $<
-
-# Optional: compile to object file if needed elsewhere
-%.o: %.c
-	$(CC) $(CFLAGS) -c -o $@ $<
+# find all .c files and map to bin/<name>
+SRCS := $(wildcard $(SRC_DIR)/*.c)
+TARGETS := $(patsubst $(SRC_DIR)/%.c,$(BIN_DIR)/%,$(SRCS))
 
 .PHONY: all clean
+all: $(TARGETS)
+
+$(BIN_DIR)/%: $(SRC_DIR)/%.c | $(BIN_DIR)
+    $(CC) $(CFLAGS) -o $@ $<
+
+$(BIN_DIR):
+    mkdir -p $(BIN_DIR)
+
 clean:
-	rm -rf $(TARGETS) *.o *.dSYM
+    rm -rf $(BIN_DIR)/*.o $(BIN_DIR)/*
+
+# run an executable: make run NAME=<program>
+.PHONY: run
+run: all
+    ./$(BIN_DIR)/$(NAME)

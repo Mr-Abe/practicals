@@ -1,0 +1,13 @@
+# compiled binaries
+/bin
+bin/
+*.exe
+
+# object files and editor artifacts
+*.o
+*.dSYM
+*.swp
+.vscode/
+
+# build artifacts
+*.out
